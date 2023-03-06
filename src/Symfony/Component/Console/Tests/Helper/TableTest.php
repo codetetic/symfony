@@ -1624,4 +1624,21 @@ TABLE;
 
         $this->assertSame($expected, $this->getOutputContent($output));
     }
+
+    public function testMultibyteCharacterColumnWidth()
+    {
+        $table = new Table($output = $this->getOutputStream());
+        $table->setRows([[new TableCell('🐘'), '']]);
+        $table->render();
+
+        $expected =
+            <<<'TABLE'
++----+--+
+| 🐘 |  |
++----+--+
+
+TABLE;
+
+        $this->assertEquals($expected, $this->getOutputContent($output));
+    }
 }
