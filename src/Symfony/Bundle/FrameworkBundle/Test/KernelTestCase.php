@@ -19,5 +19,7 @@ abstract class KernelTestCase extends TestCase
     use Traits\MailerAssertionsTrait;
     use Traits\NotifierTrait;
     use Traits\NotifierAssertionsTrait;
+    use Traits\HttpClientTrait;
+    use Traits\HttpClientAssertionsTrait;
     use Traits\KernelTrait;
 }

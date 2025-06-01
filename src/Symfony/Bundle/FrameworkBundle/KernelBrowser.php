@@ -56,6 +56,7 @@ class KernelBrowser extends HttpKernelBrowser
      */
     public function getProfile(): HttpProfile|false|null
     {
+        trigger_deprecation('symfony/framework-bundle', '7.4', 'Use data_collector.http_client instead.');
         if (!isset($this->response) || !$this->getContainer()->has('profiler')) {
             return false;
         }
@@ -70,6 +71,7 @@ class KernelBrowser extends HttpKernelBrowser
      */
     public function enableProfiler(): void
     {
+        trigger_deprecation('symfony/framework-bundle', '7.4', 'Use data_collector.http_client instead.');
         if ($this->getContainer()->has('profiler')) {
             $this->profiler = true;
         }

@@ -17,7 +17,5 @@ abstract class WebTestCase extends KernelTestCase
     use Traits\BrowserKitAssertionsTrait;
     use Traits\DomCrawlerTrait;
     use Traits\DomCrawlerAssertionsTrait;
-    use Traits\HttpClientTrait;
-    use Traits\HttpClientAssertionsTrait;
     use Traits\WebTrait;
 }

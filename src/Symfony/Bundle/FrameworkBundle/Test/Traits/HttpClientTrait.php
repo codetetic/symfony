@@ -11,30 +11,17 @@
 
 namespace Symfony\Bundle\FrameworkBundle\Test\Traits;
 
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector;
 
 trait HttpClientTrait
 {
     public static function getHttpClientDataCollector(): HttpClientDataCollector
     {
-        /** @var KernelBrowser */
-        $client = static::getClient();
-
-        if (!$client instanceof KernelBrowser) {
-            static::fail('"getClient()" must be an instance of "Symfony\Bundle\FrameworkBundle\KernelBrowser"');
+        $container = static::getContainer();
+        if ($container->has('data_collector.http_client')) {
+            return $container->get('data_collector.http_client');
         }
 
-        if (!($profile = $client->getProfile())) {
-            static::fail('The Profiler must be enabled for the current request. Please ensure to call "$client->enableProfiler()" before making the r
-equest.');
-        }
-
-        $collector = $profile->getCollector('http_client');
-        if (!$collector instanceof HttpClientDataCollector) {
-            static::fail('The "http_client" collector must be an instance of "Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector".');
-        }
-
-        return $collector;
+        static::fail('"http_client" in config/packages/framework.yaml must be setup to make http client assertions.');
     }
 }
